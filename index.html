@@ -3,125 +3,179 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Minha Mensagem</title>
+<title>Carta Interativa Cinemática</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
-    body {
-        margin: 0;
-        padding: 0;
-        font-family: 'Pacifico', cursive;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        color: #fff;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #fff;
+}
 
-    .container {
-        text-align: center;
-        max-width: 600px;
-    }
+.container {
+    position: relative;
+    text-align: center;
+    max-width: 600px;
+    perspective: 1500px;
+}
 
-    .intro, .book, .final {
-        display: none;
-    }
+/* Partículas de fundo */
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
 
-    .visible {
-        display: block;
-    }
+/* Envelope / Carta */
+.envelope-container {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 0 auto 30px;
+    cursor: pointer;
+    z-index: 2;
+}
 
-    button {
-        padding: 10px 20px;
-        font-size: 1em;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        background-color: #fff;
-        color: #ff6b81;
-        margin-top: 20px;
-        transition: 0.3s;
-    }
+.envelope, .letter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: all 1s ease;
+    transform-origin: bottom center;
+}
 
-    button:hover {
-        background-color: #ff6b81;
-        color: #fff;
-    }
+.envelope.open {
+    transform: rotateX(-120deg);
+}
 
-    .page {
-        display: none;
-        margin-top: 20px;
-        padding: 20px;
-        background: rgba(0,0,0,0.3);
-        border-radius: 15px;
-        box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
+.letter {
+    z-index: 2;
+    transform: translateY(-220px) rotateX(90deg);
+    opacity: 0;
+}
 
-    .page img {
-        max-width: 100%;
-        border-radius: 10px;
-        margin-top: 15px;
-    }
+.letter.open {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+}
 
-    .page.visible {
-        display: block;
-    }
+/* Livro */
+.book {
+    display: none;
+    transform-style: preserve-3d;
+    z-index: 3;
+}
 
-    .decor {
-        font-size: 2em;
-        color: #ffd1dc;
-    }
+.page {
+    display: none;
+    margin-top: 20px;
+    padding: 25px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease;
+}
 
-    .final img {
-        max-width: 200px;
-        border-radius: 50%;
-        margin-top: 15px;
-    }
+.page img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
-    .author {
-        margin-top: 10px;
-        font-style: italic;
-        font-size: 1.2em;
-    }
+.page.visible {
+    display: block;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    0% {opacity:0; transform: translateY(20px);}
+    100% {opacity:1; transform: translateY(0);}
+}
+
+.decor {
+    font-size: 2em;
+    color: #ffd1dc;
+}
+
+/* Final */
+.final {
+    display: none;
+    animation: fadeIn 1s ease forwards;
+}
+
+.final img {
+    max-width: 200px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.author {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+/* Música de fundo */
+audio {
+    display: none;
+}
 </style>
 </head>
 <body>
+
+<!-- Partículas -->
+<canvas class="particles" id="particles"></canvas>
+
 <div class="container">
 
-    <!-- Introdução -->
+    <!-- Introdução / Carta -->
     <div class="intro visible">
         <h1>Eu quero mandar isso pra você para entender tudo de vez 💌</h1>
-        <button onclick="startBook()">Continuar</button>
+        <div class="envelope-container" id="envelopeContainer">
+            <img src="carta.capa.png" alt="Envelope" class="envelope" id="envelope">
+            <img src="carta.aberta.png" alt="Carta" class="letter" id="letter">
+        </div>
+        <p>Clique no envelope para abrir a carta.</p>
     </div>
 
     <!-- Livro -->
     <div class="book">
         <div class="page visible" id="page1">
             <div class="decor">🌸🌸🌸</div>
-            <p>Página 1: Aqui vai o texto da primeira página. Escreva algo fofo ou romântico, lembrando de deixar pessoal.</p>
+            <p>Página 1: Aqui vai o texto da primeira página. Algo fofo ou romântico.</p>
             <img src="https://via.placeholder.com/400x200" alt="Foto 1">
             <button onclick="nextPage(2)">Próxima página →</button>
         </div>
-
         <div class="page" id="page2">
             <div class="decor">🌼🌼🌼</div>
-            <p>Página 2: Continue com sua mensagem, mostrando carinho, lembranças ou pensamentos especiais.</p>
+            <p>Página 2: Continue com carinho e lembranças especiais.</p>
             <img src="https://via.placeholder.com/400x200" alt="Foto 2">
             <button onclick="nextPage(3)">Próxima página →</button>
         </div>
-
         <div class="page" id="page3">
             <div class="decor">💖💖💖</div>
-            <p>Página 3: Mais texto, momentos, sentimentos, qualquer coisa que você queira expressar.</p>
+            <p>Página 3: Mais momentos e sentimentos.</p>
             <img src="https://via.placeholder.com/400x200" alt="Foto 3">
             <button onclick="nextPage(4)">Próxima página →</button>
         </div>
-
         <div class="page" id="page4">
             <div class="decor">✨✨✨</div>
-            <p>Página 4: Quase final, prepara para a mensagem impactante final.</p>
+            <p>Página 4: Prepare-se para a mensagem final impactante.</p>
             <img src="https://via.placeholder.com/400x200" alt="Foto 4">
             <button onclick="showFinal()">Finalizar</button>
         </div>
@@ -137,21 +191,75 @@
 
 </div>
 
+<!-- Música de fundo -->
+<audio id="bgMusic" loop autoplay>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-    function startBook() {
-        document.querySelector('.intro').classList.remove('visible');
-        document.querySelector('.book').classList.add('visible');
-    }
+// Envelope / Carta
+const envelope = document.getElementById('envelope');
+const letter = document.getElementById('letter');
+const envelopeContainer = document.getElementById('envelopeContainer');
+const intro = document.querySelector('.intro');
+const book = document.querySelector('.book');
 
-    function nextPage(pageNumber) {
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
-        document.getElementById('page'+pageNumber).classList.add('visible');
-    }
+// Abrir carta
+envelopeContainer.addEventListener('click', () => {
+    envelope.classList.add('open');
+    letter.classList.add('open');
+    setTimeout(() => {
+        letter.addEventListener('click', () => {
+            intro.classList.remove('visible');
+            book.style.display = 'block';
+        });
+    }, 800);
+});
 
-    function showFinal() {
-        document.querySelector('.book').classList.remove('visible');
-        document.querySelector('.final').classList.add('visible');
+// Livro
+function nextPage(pageNumber) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+    document.getElementById('page'+pageNumber).classList.add('visible');
+}
+
+// Final
+function showFinal() {
+    document.querySelector('.book').style.display = 'none';
+    document.querySelector('.final').style.display = 'block';
+}
+
+// Partículas simples
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const particles = [];
+for(let i=0;i<100;i++){
+    particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r: Math.random()*3+1, d: Math.random()*2});
+}
+function drawParticles(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = "rgba(255,255,255,0.7)";
+    ctx.beginPath();
+    for(let i=0;i<particles.length;i++){
+        let p = particles[i];
+        ctx.moveTo(p.x,p.y);
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
     }
+    ctx.fill();
+    updateParticles();
+}
+function updateParticles(){
+    for(let i=0;i<particles.length;i++){
+        let p=particles[i];
+        p.y += Math.sin(p.d)+0.5;
+        p.x += Math.cos(p.d);
+        if(p.y>canvas.height) p.y=0;
+        if(p.x>canvas.width) p.x=0;
+    }
+    requestAnimationFrame(drawParticles);
+}
+drawParticles();
 </script>
 
 </body>
