@@ -47,8 +47,8 @@ body {
 
 /* Capa da frente */
 .cover.front {
-  width: 100%;
-  height: 100%;
+  width: 300;
+  height: 200;
   border-radius: 8px;
   z-index: 10;
   cursor: pointer;
