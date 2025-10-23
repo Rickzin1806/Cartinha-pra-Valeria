@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta Cinemática 2.0</title>
+<title>Carta Inicial</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 body {
     margin:0; padding:0;
-    font-family: 'Pacifico', cursive;
+    font-family:'Pacifico', cursive;
     overflow:hidden;
     height:100vh;
     display:flex;
@@ -19,31 +19,21 @@ body {
     color:#fff;
 }
 
-/* Partículas de fundo */
-.particles {
-    position: fixed; width:100%; height:100%;
-    top:0; left:0; z-index:0;
-}
-
-/* Blur de fundo */
-.blur-background {
-    filter: blur(10px) brightness(0.7);
-}
-
-/* Container geral */
 .container {
     position: relative;
-    text-align: center;
+    text-align:center;
     z-index:2;
     perspective:1500px;
 }
 
-/* Envelope */
+.blur-background {
+    filter: blur(10px) brightness(0.7);
+}
+
 .envelope-container {
-    width: 300px; height:200px;
-    position: relative;
+    width:300px; height:200px;
     cursor:pointer;
-    margin: 20px auto;
+    margin:20px auto;
     transform-style: preserve-3d;
 }
 
@@ -51,11 +41,10 @@ body {
     width:100%; height:100%;
     border-radius:15px;
     box-shadow:0 5px 15px rgba(0,0,0,0.3);
-    transform-origin: left;
+    transform-origin:left;
     transition: transform 1s ease;
 }
 
-/* Folha branca */
 .sheet {
     display:none;
     position:fixed;
@@ -71,47 +60,6 @@ body {
     transition: transform 1s ease;
 }
 
-/* Livro de 4 páginas */
-.book {
-    display:none;
-    transform-style: preserve-3d;
-    z-index:3;
-}
-
-.page {
-    display:none;
-    margin-top:20px;
-    padding:25px;
-    background: rgba(0,0,0,0.3);
-    border-radius:15px;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
-    transform-origin: left center;
-    transform-style: preserve-3d;
-    transition: transform 0.8s ease, opacity 0.8s ease;
-}
-
-.page img {
-    max-width:100%; border-radius:10px;
-    margin-top:15px;
-}
-
-.page.visible {
-    display:block;
-    opacity:1;
-}
-
-.decor { font-size:2em; color:#ffd1dc; }
-
-/* Final */
-.final {
-    display:none;
-    animation: fadeIn 1s ease forwards;
-}
-
-.final img { max-width:200px; border-radius:50%; margin-top:15px; }
-.author { margin-top:10px; font-style:italic; font-size:1.2em; }
-
-/* Botões */
 button {
     padding:10px 20px;
     font-size:1em;
@@ -124,24 +72,17 @@ button {
     transition:0.3s;
 }
 button:hover { background-color:#fff; color:#ff6b81; }
-
-@keyframes fadeIn {
-    0% {opacity:0; transform:translateY(20px);}
-    100% {opacity:1; transform:translateY(0);}
-}
 </style>
 </head>
 <body>
 
-    <canvas class="particles" id="particles"></canvas>
-
 <div class="container" id="mainContainer">
 
-    <!-- Envelope -->
+    <!-- Introdução / Envelope -->
     <div class="intro">
         <h1>Eu quero mandar isso pra você para entender tudo de vez 💌</h1>
         <div class="envelope-container" id="envelopeContainer">
-              <img src="carta.capa.png" alt="Envelope fechado" class="envelope" id="envelope">
+            <img src="carta.capa.png" alt="Envelope fechado" class="envelope" id="envelope">
         </div>
         <p>Clique no envelope para abrir a carta.</p>
     </div>
@@ -149,97 +90,22 @@ button:hover { background-color:#fff; color:#ff6b81; }
     <!-- Carta principal -->
     <div class="sheet" id="sheet">
         <h2>📄 Carta principal</h2>
-        <p>Aqui você pode colocar o texto principal da sua mensagem. Seja fofo, romântico ou pessoal.</p>
+        <p>Aqui você coloca o texto principal da sua mensagem. Seja fofo, romântico ou pessoal.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <button id="startBook">Ler a outra carta →</button>
-    </div>
-
-    <!-- Livro 4 páginas -->
-    <div class="book" id="book">
-        <div class="page visible" id="page1">
-            <div class="decor">🌸🌸🌸</div>
-            <p>Página 1: Mensagem inicial.</p>
-            <img src="https://via.placeholder.com/400x200" alt="Foto 1">
-            <button onclick="nextPage(2)">Próxima página →</button>
-        </div>
-        <div class="page" id="page2">
-            <div class="decor">🌼🌼🌼</div>
-            <p>Página 2: Lembranças e carinho.</p>
-            <img src="https://via.placeholder.com/400x200" alt="Foto 2">
-            <button onclick="nextPage(3)">Próxima página →</button>
-        </div>
-        <div class="page" id="page3">
-            <div class="decor">💖💖💖</div>
-            <p>Página 3: Mais sentimentos e momentos especiais.</p>
-            <img src="https://via.placeholder.com/400x200" alt="Foto 3">
-            <button onclick="nextPage(4)">Próxima página →</button>
-        </div>
-        <div class="page" id="page4">
-            <div class="decor">✨✨✨</div>
-            <p>Página 4: Preparando para mensagem final impactante...</p>
-            <img src="https://via.placeholder.com/400x200" alt="Foto 4">
-            <button onclick="showFinal()">Finalizar</button>
-        </div>
-    </div>
-
-    <!-- Final -->
-    <div class="final" id="final">
-        <h1>💌 E lembre-se sempre...</h1>
-        <p>"O que sentimos não precisa ser dito, mas precisa ser vivido."</p>
-        <img src="https://via.placeholder.com/150" alt="Foto final">
-        <div class="author">— Henrique</div>
+        <button id="goBook">Ler a outra carta →</button>
     </div>
 
 </div>
 
-<audio id="bgMusic" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-// Partículas
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-const particles=[];
-for(let i=0;i<100;i++){
-    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*3+1,d:Math.random()*2});
-}
-function drawParticles(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(255,255,255,0.7)";
-    ctx.beginPath();
-    for(let i=0;i<particles.length;i++){
-        let p=particles[i];
-        ctx.moveTo(p.x,p.y);
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2,true);
-    }
-    ctx.fill();
-    updateParticles();
-}
-function updateParticles(){
-    for(let i=0;i<particles.length;i++){
-        let p=particles[i];
-        p.y+=Math.sin(p.d)+0.5;
-        p.x+=Math.cos(p.d);
-        if(p.y>canvas.height)p.y=0;
-        if(p.x>canvas.width)p.x=0;
-    }
-    requestAnimationFrame(drawParticles);
-}
-drawParticles();
-
-// Envelope -> Carta
-// const envelope = document.getElementById('envelope');
+// Envelope → Carta principal
+const envelope = document.getElementById('envelope');
 const sheet = document.getElementById('sheet');
 const mainContainer = document.getElementById('mainContainer');
-const startBookBtn = document.getElementById('startBook');
-const book = document.getElementById('book');
-const final = document.getElementById('final');
+const goBookBtn = document.getElementById('goBook');
 
 envelope.addEventListener('click', ()=>{
-    envelope.style.transform='rotateY(-180deg)'; // desdobra animação
+    envelope.style.transform='rotateY(-180deg)';
     setTimeout(()=>{
         envelope.style.display='none';
         sheet.style.display='block';
@@ -248,24 +114,10 @@ envelope.addEventListener('click', ()=>{
     },1000);
 });
 
-// Carta -> Livro
-startBookBtn.addEventListener('click', ()=>{
-    sheet.style.display='none';
-    mainContainer.classList.remove('blur-background');
-    book.style.display='block';
+// Botão leva para o segundo HTML
+goBookBtn.addEventListener('click', ()=>{
+    window.location.href='carta-livro.html'; // nome do segundo HTML
 });
-
-// Livro
-function nextPage(num){
-    const pages=document.querySelectorAll('.page');
-    pages.forEach(p=>p.classList.remove('visible'));
-    document.getElementById('page'+num).classList.add('visible');
-}
-
-// Final
-function showFinal(){
-    book.style.display='none';
-    final.style.display='block';}
 </script>
 
 </body>
