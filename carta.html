@@ -3,24 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Carta em formato de livro</title>
+  <title>Livro Digital</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="book" id="book">
-    <div class="cover" onclick="abrirLivro()">💌 Minha Carta</div>
+    <!-- Capa da frente -->
+    <div class="cover front" onclick="nextPage()">💌 Minha Carta</div>
+
+    <!-- Páginas internas -->
     <div class="pages">
-      <div class="page"><b>Querida pessoa,</b><br><br>Esta carta é especial — feita com carinho e com o coração aberto. Cada palavra foi pensada pra te fazer sorrir e sentir o quanto és importante.</div>
-      <div class="page">Que a vida te abrace com leveza, que teus dias sejam cheios de paz, amor e boas surpresas. 💖</div>
-      <div class="page">E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</div>
-      <div class="page" style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</div>
+      <div class="page" id="page1">
+        <h2>🌸 Página 1</h2>
+        <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
+      </div>
+      <div class="page" id="page2">
+        <h2>🌼 Página 2</h2>
+        <p>Que seus dias sejam cheios de paz, amor e boas surpresas. 💖</p>
+      </div>
+      <div class="page" id="page3">
+        <h2>💖 Página 3</h2>
+        <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</p>
+      </div>
+      <div class="page" id="page4">
+        <h2>✨ Página 4</h2>
+        <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
+      </div>
     </div>
-    <div class="back-cover"></div>
+
+    <!-- Contracapa -->
+    <div class="cover back" id="backCover">
+      <h2>Fim do livro</h2>
+      <p>"O que é verdadeiro, o tempo não apaga."</p>
+      <p class="author">— Henrique</p>
+    </div>
   </div>
 
+  <!-- Sons -->
+  <audio id="pageSound">
+    <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
+  </audio>
+
+  <audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+  </audio>
+
   <script>
-    function abrirLivro() {
-      document.getElementById('book').classList.toggle('open');
+    let current = 0;
+    const pages = document.querySelectorAll(".pages .page");
+    const cover = document.querySelector(".cover.front");
+    const backCover = document.querySelector(".cover.back");
+    const sound = document.getElementById("pageSound");
+
+    function nextPage() {
+      if(current < pages.length) {
+        sound.play();
+        pages[current].classList.add("flipped");
+        pages[current].style.zIndex = pages.length - current;
+        current++;
+        if(current === 1) {
+          cover.classList.add("flipped");
+        }
+      } else {
+        backCover.classList.add("flipped");
+      }
     }
   </script>
 </body>
