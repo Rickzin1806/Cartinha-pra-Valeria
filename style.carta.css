@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+    perspective: 1500px;
+}
+
+/* Livro */
+.book-container {
+    position: relative;
+    width: 500px;
+    height: 300px;
+    transform-style: preserve-3d;
+}
+
+/* Páginas */
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    color: #333;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform-origin: left;
+    transition: transform 1s ease, z-index 1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backface-visibility: hidden;
+}
+
+.page img {
+    max-width: 80%;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* Botão */
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff6b81;
+    color: #fff;
+    font-size: 1em;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #ff6b81;
+}
+
+/* Tela final */
+.final {
+    display: none;
+    text-align: center;
+    animation: fadeIn 1s ease forwards;
+}
+
+.final img {
+    max-width: 150px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.author {
+    margin-top: 10px;
+    font-style: italic;
+    font-size: 1.2em;
+}
+
+/* Animação */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .book-container {
+        width: 90%;
+        height: 250px;
+    }
+
+    .page {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    p {
+        font-size: 0.9em;
+    }
+
+    button {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .final img {
+        max-width: 120px;
+    }
+}
