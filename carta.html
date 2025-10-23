@@ -12,9 +12,9 @@
     <!-- Capa da frente -->
     <div class="cover front" onclick="nextPage()">💌 Minha Carta</div>
 
-    <!-- Container das páginas internas -->
+    <!-- Container das páginas -->
     <div class="pages">
-        <div class="page" id="page1">
+        <div class="page" id="page1"> 
             <h2>🌸 Página 1</h2>
             <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
         </div>
@@ -40,7 +40,6 @@
     </div>
 </div>
 
-<!-- Sons -->
 <audio id="pageSound">
     <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
 </audio>
@@ -55,6 +54,10 @@ const cover = document.querySelector(".cover.front");
 const backCover = document.querySelector(".cover.back");
 const sound = document.getElementById("pageSound");
 
+pages.forEach((p, i) => {
+    p.style.zIndex = pages.length - i; // z-index inicial
+});
+
 function nextPage() {
     if(current < pages.length) {
         current++;
@@ -63,7 +66,6 @@ function nextPage() {
             cover.classList.add("flipped");
         } else if(current <= pages.length - 1) {
             pages[current].classList.add("flipped");
-            pages[current].style.zIndex = pages.length - current;
         } else {
             backCover.classList.add("flipped");
         }

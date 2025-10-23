@@ -1,115 +1,63 @@
-/* Reset básico */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-/* Corpo da página */
+* { box-sizing: border-box; margin: 0; padding: 0; }
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg, #c8d8ff, #f7eaff);
-  perspective: 2000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #c8d8ff, #f7eaff);
+    perspective: 2000px;
 }
-
-/* Livro */
 .book {
-  position: relative;
-  width: 320px;
-  height: 440px;
-  transform-style: preserve-3d;
+    position: relative;
+    width: 320px;
+    height: 440px;
+    transform-style: preserve-3d;
 }
-
 /* Capas */
 .cover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  backface-visibility: hidden;
-  transform-origin: left;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: transform 1s ease-in-out;
-  cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    transform-origin: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: transform 1s ease-in-out;
+    cursor: pointer;
 }
-
-.cover.front {
-  background: linear-gradient(145deg, #30475e, #222831);
-  color: white;
-  font-size: 1.6em;
-  font-weight: bold;
-  z-index: 10;
-}
-
-.cover.back {
-  background: linear-gradient(145deg, #222831, #30475e);
-  color: #fff;
-  transform: rotateY(180deg);
-  z-index: 1;
-}
-
-.cover.front.flipped {
-  transform: rotateY(-180deg);
-}
-
-/* Container das páginas */
-.pages {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-/* Páginas internas */
+.cover.front { background: #30475e; color: #fff; font-size: 1.6em; font-weight: bold; z-index: 10; }
+.cover.back { background: #222831; color: #fff; transform: rotateY(180deg); z-index: 1; }
+.cover.front.flipped { transform: rotateY(-180deg); }
+/* Container de páginas */
+.pages { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; }
+/* Páginas */
 .page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #fffaf0;       /* cor da página */
-  border: 2px solid #ccc;    /* borda visível */
-  border-radius: 5px;
-  padding: 25px;
-  overflow-y: auto;
-  backface-visibility: hidden;
-  transform-origin: left;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* sombra */
-  transition: transform 1s ease-in-out, z-index 0s linear 1s; /* animação suave */
-  z-index: 5; /* ajustado pelo JS */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #fffaf0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 25px;
+    overflow-y: auto;
+    backface-visibility: hidden;
+    transform-origin: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: transform 1s ease-in-out;
 }
-
-.page.flipped {
-  transform: rotateY(-180deg);
-}
-
-/* Texto das páginas */
-.page h2 {
-  color: #ff6b81;
-  font-size: 1.4em;
-  margin-bottom: 15px;
-}
-
-.page p {
-  font-size: 1.1em;
-  line-height: 1.5;
-}
-
-/* Autor */
-.author {
-  margin-top: 10px;
-  font-style: italic;
-}
-
+.page.flipped { transform: rotateY(-180deg); }
+/* Texto */
+.page h2 { color: #ff6b81; font-size: 1.4em; margin-bottom: 15px; }
+.page p { font-size: 1.1em; line-height: 1.5; }
+.author { font-style: italic; margin-top: 10px; }
 /* Responsivo */
-@media (max-width: 600px) {
-  .book { width: 90%; height: 400px; }
-  .page { font-size: 1em; padding: 20px; }
-  .page h2 { font-size: 1.2em; }
+@media(max-width:600px){
+    .book{ width:90%; height:400px; }
+    .page{ font-size:1em; padding:20px; }
+    .page h2{ font-size:1.2em; }
 }
