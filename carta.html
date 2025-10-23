@@ -3,57 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livro Digital com Imagens</title>
-<link rel="stylesheet" href="style.css">
+<title>Livro Digital com Texto</title>
+<link rel="stylesheet" href="style.carta.css">
 </head>
 <body>
 
-<div class="book" id="book">
-    <!-- Capa da frente -->
-    <img src="capa.png" alt="Capa" class="cover front" onclick="nextPage()">
+<div class="book">
+  <!-- Capa da frente -->
+  <img src="capa.snoopy.webp" class="cover front" id="coverFront">
 
-    <!-- Páginas internas -->
-    <img src="capa.snoopy.png" alt="Página 1" class="page">
-    <img src="folha.snoopy.jpg" alt="Página 2" class="page">
-    <img src="folha.snoopy" alt="Página 3" class="page">
-    <img src="folha.snoopy" alt="Página 4" class="page">
+  <!-- Páginas internas com texto -->
+  <div class="page" id="page1">
+    <h2>🌸 Página 1</h2>
+    <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
+  </div>
+  <div class="page" id="page2">
+    <h2>🌼 Página 2</h2>
+    <p>Que seus dias sejam cheios de paz, amor e boas surpresas. 💖</p>
+  </div>
+  <div class="page" id="page3">
+    <h2>💖 Página 3</h2>
+    <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</p>
+  </div>
+  <div class="page" id="page4">
+    <h2>✨ Página 4</h2>
+    <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
+  </div>
 
-    <!-- Contracapa -->
-    <img src="contracapa.snoopy.jpg" alt="Contracapa" class="cover back">
+  <!-- Contracapa -->
+  <img src="contracapa.snoopy.jpg" class="cover back" id="coverBack">
 </div>
 
-<!-- Sons -->
 <audio id="pageSound">
-    <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
-</audio>
-<audio id="bgMusic" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+  <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
 </audio>
 
 <script>
-let current = -1;
-const pages = document.querySelectorAll(".book .page");
-const cover = document.querySelector(".cover.front");
-const backCover = document.querySelector(".cover.back");
-const sound = document.getElementById("pageSound");
+const pages = [
+  document.getElementById('coverFront'),
+  document.getElementById('page1'),
+  document.getElementById('page2'),
+  document.getElementById('page3'),
+  document.getElementById('page4'),
+  document.getElementById('coverBack')
+];
 
-// Define z-index inicial
+let current = 0;
+const sound = document.getElementById('pageSound');
+
 pages.forEach((p, i) => {
-    p.style.zIndex = pages.length - i;
+  p.style.zIndex = pages.length - i;
+  p.addEventListener('click', () => nextPage());
 });
 
 function nextPage() {
-    if(current < pages.length) {
-        current++;
-        sound.play();
-        if(current === 0) {
-            cover.classList.add("flipped");
-        } else if(current <= pages.length - 1) {
-            pages[current].classList.add("flipped");
-        } else {
-            backCover.classList.add("flipped");
-        }
-    }
+  if(current < pages.length) {
+    pages[current].classList.add('flipped');
+    sound.play();
+    current++;
+  }
 }
 </script>
 

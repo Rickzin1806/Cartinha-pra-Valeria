@@ -16,24 +16,38 @@ body {
   transform-style: preserve-3d;
 }
 
-/* Todas as imagens do livro */
-.book img {
+/* Capas e páginas */
+.book img,
+.page {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  backface-visibility: hidden;
   transform-origin: left;
+  backface-visibility: hidden;
   transition: transform 1s ease;
   cursor: pointer;
 }
 
-/* Classes para virar página */
+/* Páginas internas com fundo “papel” */
+.page {
+  background: #fffaf0; /* você pode trocar para imagem de textura com background-image */
+  border-radius: 5px;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Virar páginas */
 .cover.front.flipped { transform: rotateY(-180deg); z-index: 1; }
 .page.flipped { transform: rotateY(-180deg); }
 .cover.back.flipped { transform: rotateY(-180deg); z-index: 10; }
 
+/* Texto */
+.page h2 { color: #ff6b81; margin-bottom: 10px; }
+.page p { font-size: 1em; line-height: 1.5; }
+
 /* Responsivo */
 @media(max-width:600px){
-    .book { width: 90%; height: 400px; }
+  .book { width:90%; height:400px; }
+  .page { padding:15px; font-size:0.9em; }
 }
