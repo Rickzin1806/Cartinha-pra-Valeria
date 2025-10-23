@@ -5,7 +5,7 @@ body {
   height: 100vh;
   margin: 0;
   background: linear-gradient(135deg, #c8d8ff, #f7eaff);
-  perspective: 2000px;
+  perspective: 2500px;
   font-family: 'Georgia', serif;
   overflow: hidden;
 }
@@ -25,7 +25,7 @@ body {
   height: 100%;
   transform-origin: left;
   backface-visibility: hidden;
-  transition: transform 1s ease;
+  transition: transform 1s ease, box-shadow 1s ease;
   cursor: pointer;
   border-radius: 5px;
 }
@@ -41,25 +41,10 @@ body {
 /* Virar páginas */
 .cover.front.flipped { transform: rotateY(-180deg); z-index: 1; }
 .page.flipped { transform: rotateY(-180deg); }
-.cover.back.flipped { transform-origin: left; transition: transform 1s ease; }
 
 /* Texto */
 .page h2 { color: #ff6b81; margin-bottom: 10px; }
 .page p { font-size: 1em; line-height: 1.5; }
-
-/* Tela final */
-#finalScreen {
-  display: none;
-  position: fixed;
-  inset: 0;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.8);
-  color: white;
-  font-size: 3em;
-  font-weight: bold;
-  z-index: 999;
-}
 
 /* Responsivo */
 @media(max-width:600px){
