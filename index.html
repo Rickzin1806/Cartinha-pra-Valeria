@@ -53,17 +53,19 @@ body {
 .envelope-opened { display:none; }
 
 /* Folha branca */
+/* Retira blur da folha */
 .sheet {
     display:none;
-    position:fixed;
+    position: fixed;
     top:0; left:0;
     width:100%; height:100%;
     background:#fff;
-    z-index:100;
+    z-index:100; /* acima de tudo */
     padding:30px;
     box-sizing:border-box;
     overflow-y:auto;
     color:#333;
+    filter: none; /* garante que não fique borrada */
 }
 
 /* Fundo embaçado */
@@ -143,7 +145,7 @@ button:hover { background-color:#fff; color:#ff6b81; }
         <h1>Eu quero mandar isso pra você para entender tudo de vez 💌</h1>
         <div class="envelope-container" id="envelopeContainer">
             <img src="carta.capa.png" alt="Envelope fechado" class="envelope" id="envelope">
-            <img src="carta.aberta.png" alt="Envelope aberto" class="envelope-opened" id="envelopeOpened">
+            <img src="cartra.aberta.png" alt="Envelope aberto" class="envelope-opened" id="envelopeOpened">
         </div>
         <p>Clique no envelope para abrir a carta.</p>
     </div>
@@ -214,9 +216,10 @@ envelope.addEventListener('click', ()=>{
     envelopeOpened.style.display='block';
 });
 
+// Envelope → Folha
 envelopeOpened.addEventListener('click', ()=>{
     sheet.style.display='block';
-    mainContainer.classList.add('blur-background');
+    mainContainer.classList.add('blur-background'); // apenas fundo fica borrado
 });
 
 // Folha → Livro
