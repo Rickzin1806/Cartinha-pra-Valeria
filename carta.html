@@ -3,27 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livro Digital com Texto</title>
-<link rel="stylesheet" href="style.carta.css">
+<title>Livro Digital Realista</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="book">
   <!-- Capa da frente -->
-  <img src="capa.snoopy.webp" class="cover front" id="coverFront">
+  <img src="capa.png" class="cover front" id="coverFront">
 
-  <!-- Páginas internas com texto -->
+  <!-- Páginas internas -->
   <div class="page" id="page1">
     <h2>🌸 Página 1</h2>
-    <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
+    <p>Querida pessoa, esta carta é feita com carinho e coração aberto.</p>
   </div>
   <div class="page" id="page2">
     <h2>🌼 Página 2</h2>
-    <p>Que seus dias sejam cheios de paz, amor e boas surpresas. 💖</p>
+    <p>Que seus dias sejam cheios de paz, amor e boas surpresas.</p>
   </div>
   <div class="page" id="page3">
     <h2>💖 Página 3</h2>
-    <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</p>
+    <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração.</p>
   </div>
   <div class="page" id="page4">
     <h2>✨ Página 4</h2>
@@ -31,7 +31,12 @@
   </div>
 
   <!-- Contracapa -->
-  <img src="contracapa.snoopy.jpg" class="cover back" id="coverBack">
+  <img src="contracapa.png" class="cover back" id="coverBack">
+</div>
+
+<!-- Tela final -->
+<div id="finalScreen">
+  <h1>💌 FIM</h1>
 </div>
 
 <audio id="pageSound">
@@ -50,17 +55,28 @@ const pages = [
 
 let current = 0;
 const sound = document.getElementById('pageSound');
+const finalScreen = document.getElementById('finalScreen');
 
 pages.forEach((p, i) => {
-  p.style.zIndex = pages.length - i;
+  p.style.zIndex = pages.length - i; // empilha
   p.addEventListener('click', () => nextPage());
 });
 
 function nextPage() {
-  if(current < pages.length) {
+  if(current < pages.length-1) {
     pages[current].classList.add('flipped');
     sound.play();
     current++;
+  } else if(current === pages.length-1) {
+    // Contracapa vira e fica à esquerda
+    pages[current].classList.add('flipped');
+    pages[current].style.transform = 'rotateY(-180deg) translateX(-100%)';
+    pages[current].style.left = '0';
+    pages[current].style.zIndex = '1';
+    current++;
+  } else {
+    // Clique na contracapa ou depois de tudo: mostra FIM
+    finalScreen.style.display = 'flex';
   }
 }
 </script>
