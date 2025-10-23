@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livro Digital com Imagens</title>
+<link rel="stylesheet" href="style.carta.css">
+</head>
+<body>
+
+<div class="book" id="book">
+    <!-- Capa da frente -->
+    <img src="capa.png" alt="Capa" class="cover front" onclick="nextPage()">
+
+    <!-- Páginas internas -->
+    <img src="page1.png" alt="Página 1" class="page">
+    <img src="page2.png" alt="Página 2" class="page">
+    <img src="page3.png" alt="Página 3" class="page">
+    <img src="page4.png" alt="Página 4" class="page">
+
+    <!-- Contracapa -->
+    <img src="contracapa.png" alt="Contracapa" class="cover back">
+</div>
+
+<!-- Sons -->
+<audio id="pageSound">
+    <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
+</audio>
+<audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let current = -1;
+const pages = document.querySelectorAll(".book .page");
+const cover = document.querySelector(".cover.front");
+const backCover = document.querySelector(".cover.back");
+const sound = document.getElementById("pageSound");
+
+// Define z-index inicial
+pages.forEach((p, i) => {
+    p.style.zIndex = pages.length - i;  
+});
+
+function nextPage() {
+    if(current < pages.length) {
+        current++;
+        sound.play();
+        if(current === 0) {
+            cover.classList.add("flipped");
+        } else if(current <= pages.length - 1) {
+            pages[current].classList.add("flipped");
+        } else {
+            backCover.classList.add("flipped");
+        }
+    }
+}
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(135deg, #c8d8ff, #f7eaff);
+  perspective: 2000px;
+  font-family: 'Georgia', serif;
+}
+
+.book {
+  position: relative;
+  width: 320px;
+  height: 440px;
+  transform-style: preserve-3d;
+}
+
+/* Todas as imagens do livro */
+.book img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  transform-origin: left;
+  transition: transform 1s ease;
+  cursor: pointer;
+}
+
+/* Classes para virar página */
+.cover.front.flipped { transform: rotateY(-180deg); z-index: 1; }
+.page.flipped { transform: rotateY(-180deg); }
+.cover.back.flipped { transform: rotateY(-180deg); z-index: 10; }
+
+/* Responsivo */
+@media(max-width:600px){
+    .book { width: 90%; height: 400px; }
+}

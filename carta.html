@@ -3,23 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livro Digital com Imagens</title>
+<title>Livro Digital</title>
 <link rel="stylesheet" href="style.carta.css">
 </head>
 <body>
 
 <div class="book" id="book">
     <!-- Capa da frente -->
-    <img src="capa.png" alt="Capa" class="cover front" onclick="nextPage()">
+    <div class="cover front" onclick="nextPage()">💌 Minha Carta</div>
 
-    <!-- Páginas internas -->
-    <img src="page1.png" alt="Página 1" class="page">
-    <img src="page2.png" alt="Página 2" class="page">
-    <img src="page3.png" alt="Página 3" class="page">
-    <img src="page4.png" alt="Página 4" class="page">
+    <!-- Container das páginas internas -->
+    <div class="pages">
+        <div class="page" id="page1">
+            <h2>🌸 Página 1</h2>
+            <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
+        </div>
+        <div class="page" id="page2">
+            <h2>🌼 Página 2</h2>
+            <p>Que seus dias sejam cheios de paz, amor e boas surpresas. 💖</p>
+        </div>
+        <div class="page" id="page3">
+            <h2>💖 Página 3</h2>
+            <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</p>
+        </div>
+        <div class="page" id="page4">
+            <h2>✨ Página 4</h2>
+            <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
+        </div>
+    </div>
 
     <!-- Contracapa -->
-    <img src="contracapa.png" alt="Contracapa" class="cover back">
+    <div class="cover back" id="backCover">
+        <h2>Fim do livro</h2>
+        <p>"O que é verdadeiro, o tempo não apaga."</p>
+        <p class="author">— Henrique</p>
+    </div>
 </div>
 
 <!-- Sons -->
@@ -32,15 +50,10 @@
 
 <script>
 let current = -1;
-const pages = document.querySelectorAll(".book .page");
+const pages = document.querySelectorAll(".pages .page");
 const cover = document.querySelector(".cover.front");
 const backCover = document.querySelector(".cover.back");
 const sound = document.getElementById("pageSound");
-
-// Define z-index inicial
-pages.forEach((p, i) => {
-    p.style.zIndex = pages.length - i;  
-});
 
 function nextPage() {
     if(current < pages.length) {
@@ -50,6 +63,7 @@ function nextPage() {
             cover.classList.add("flipped");
         } else if(current <= pages.length - 1) {
             pages[current].classList.add("flipped");
+            pages[current].style.zIndex = pages.length - current;
         } else {
             backCover.classList.add("flipped");
         }
