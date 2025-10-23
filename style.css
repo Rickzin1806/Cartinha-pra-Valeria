@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
+}
+
+/* Centralização e perspectiva */
+.container {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    perspective: 1500px;
+}
+
+/* Envelope */
+.envelope-container {
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    margin: 20px auto;
+    position: relative;
+}
+
+.envelope {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 1s ease, opacity 1s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Folha branca (carta principal) */
+.sheet {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 85%;
+    background: #fff;
+    z-index: 100;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    color: #333;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 1s ease;
+    overflow: hidden;
+}
+
+h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff6b81;
+    color: #fff;
+    margin-top: 20px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #fff;
+    color: #ff6b81;
+}
