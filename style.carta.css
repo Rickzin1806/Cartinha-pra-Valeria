@@ -1,109 +1,75 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livro Digital</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(135deg, #c8d8ff, #f7eaff);
-  perspective: 2000px;
-}
+<div class="book" id="book">
+    <!-- Capa da frente -->
+    <div class="cover front" onclick="nextPage()">💌 Minha Carta</div>
 
-.book {
-  position: relative;
-  width: 320px;
-  height: 440px;
-  transform-style: preserve-3d;
-}
+    <!-- Container das páginas internas -->
+    <div class="pages">
+        <div class="page" id="page1">
+            <h2>🌸 Página 1</h2>
+            <p>Querida pessoa, esta carta é feita com carinho e coração aberto. Cada palavra foi pensada pra te fazer sorrir.</p>
+        </div>
+        <div class="page" id="page2">
+            <h2>🌼 Página 2</h2>
+            <p>Que seus dias sejam cheios de paz, amor e boas surpresas. 💖</p>
+        </div>
+        <div class="page" id="page3">
+            <h2>💖 Página 3</h2>
+            <p>E quando sentir saudade, lembra: alguém pensou em você com todo o coração. 💫</p>
+        </div>
+        <div class="page" id="page4">
+            <h2>✨ Página 4</h2>
+            <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
+        </div>
+    </div>
 
-/* Capas */
-.cover {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  backface-visibility: hidden;
-  transform-origin: left;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: transform 1s ease-in-out;
-  cursor: pointer;
-}
+    <!-- Contracapa -->
+    <div class="cover back" id="backCover">
+        <h2>Fim do livro</h2>
+        <p>"O que é verdadeiro, o tempo não apaga."</p>
+        <p class="author">— Henrique</p>
+    </div>
+</div>
 
-.cover.front {
-  background: linear-gradient(145deg, #30475e, #222831);
-  color: white;
-  font-size: 1.6em;
-  font-weight: bold;
-  z-index: 5;
-}
+<!-- Sons -->
+<audio id="pageSound">
+    <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
+</audio>
+<audio id="bgMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
 
-.cover.back {
-  background: linear-gradient(145deg, #222831, #30475e);
-  color: #fff;
-  transform: rotateY(180deg);
-  z-index: 1;
-}
+<script>
+let current = -1;
+const pages = document.querySelectorAll(".pages .page");
+const cover = document.querySelector(".cover.front");
+const backCover = document.querySelector(".cover.back");
+const sound = document.getElementById("pageSound");
 
-.cover.front.flipped {
-  transform: rotateY(-160deg);
+function nextPage() {
+    if(current < pages.length) {
+        current++;
+        sound.play();
+        if(current === 0) {
+            cover.classList.add("flipped");
+        } else if(current <= pages.length - 1) {
+            pages[current].classList.add("flipped");
+            pages[current].style.zIndex = pages.length - current;
+        } else {
+            backCover.classList.add("flipped");
+        }
+    }
 }
+</script>
 
-/* Páginas */
-.pages {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-}
-
-.page {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #fffaf0;
-  border-radius: 5px;
-  padding: 25px;
-  overflow-y: auto;
-  backface-visibility: hidden;
-  transform-origin: left;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
-  transition: transform 1s ease-in-out;
-}
-
-.page.flipped {
-  transform: rotateY(-180deg);
-}
-
-/* Texto das páginas */
-.page h2 {
-  color: #ff6b81;
-  font-size: 1.4em;
-  margin-bottom: 15px;
-}
-
-.page p {
-  font-size: 1.1em;
-  line-height: 1.5;
-}
-
-/* Autor */
-.author {
-  margin-top: 10px;
-  font-style: italic;
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
-  .book { width: 90%; height: 400px; }
-  .page { font-size: 1em; padding: 20px; }
-  .page h2 { font-size: 1.2em; }
-}
+</body>
+</html>
