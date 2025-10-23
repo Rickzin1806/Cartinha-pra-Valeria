@@ -3,131 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mensagem Especial</title>
+<title>Minha Mensagem</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
     body {
         margin: 0;
         padding: 0;
-        height: 100vh;
+        font-family: 'Pacifico', cursive;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
         display: flex;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4);
-        font-family: 'Pacifico', cursive;
+        height: 100vh;
         color: #fff;
+        overflow: hidden;
+    }
+
+    .container {
         text-align: center;
-        overflow: hidden;
+        max-width: 600px;
     }
 
-    .card {
-        background: rgba(0,0,0,0.3);
-        padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        max-width: 400px;
-        animation: fadeIn 2s ease-in-out;
+    .intro, .book, .final {
+        display: none;
     }
 
-    h1 {
-        font-size: 2em;
-        margin-bottom: 20px;
+    .visible {
+        display: block;
     }
 
-    p {
-        font-size: 1.2em;
-        line-height: 1.5em;
-    }
-
-    .signature {
-        margin-top: 30px;
+    button {
+        padding: 10px 20px;
         font-size: 1em;
-        font-style: italic;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        color: #ff6b81;
+        margin-top: 20px;
+        transition: 0.3s;
     }
 
-    @keyframes fadeIn {
-        from {opacity: 0; transform: scale(0.8);}
-        to {opacity: 1; transform: scale(1);}
+    button:hover {
+        background-color: #ff6b81;
+        color: #fff;
     }
 
-    .hearts {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        overflow: hidden;
+    .page {
+        display: none;
+        margin-top: 20px;
+        padding: 20px;
+        background: rgba(0,0,0,0.3);
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
     }
 
-    .heart {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: red;
-        transform: rotate(-45deg);
-        animation: float 5s linear infinite;
+    .page img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-top: 15px;
     }
 
-    .heart::before,
-    .heart::after {
-        content: "";
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background: red;
+    .page.visible {
+        display: block;
+    }
+
+    .decor {
+        font-size: 2em;
+        color: #ffd1dc;
+    }
+
+    .final img {
+        max-width: 200px;
         border-radius: 50%;
+        margin-top: 15px;
     }
 
-    .heart::before {
-        top: -10px;
-        left: 0;
-    }
-
-    .heart::after {
-        left: 10px;
-        top: 0;
-    }
-
-    @keyframes float {
-        0% {transform: translateY(0) rotate(-45deg);}
-        100% {transform: translateY(-600px) rotate(-45deg);}
+    .author {
+        margin-top: 10px;
+        font-style: italic;
+        font-size: 1.2em;
     }
 </style>
 </head>
 <body>
+<div class="container">
 
-<div class="hearts" id="hearts"></div>
+    <!-- Introdução -->
+    <div class="intro visible">
+        <h1>Eu quero mandar isso pra você para entender tudo de vez 💌</h1>
+        <button onclick="startBook()">Continuar</button>
+    </div>
 
-<div class="card">
-    <h1>Oi, [nome dela]! 💌</h1>
-    <p>Queria te dizer que você é incrível e me faz sorrir toda vez que penso em você.  
-    Espero que seu dia seja tão lindo quanto você! 😍</p>
-    <div class="signature">De: Henrique ❤️</div>
+    <!-- Livro -->
+    <div class="book">
+        <div class="page visible" id="page1">
+            <div class="decor">🌸🌸🌸</div>
+            <p>Página 1: Aqui vai o texto da primeira página. Escreva algo fofo ou romântico, lembrando de deixar pessoal.</p>
+            <img src="https://via.placeholder.com/400x200" alt="Foto 1">
+            <button onclick="nextPage(2)">Próxima página →</button>
+        </div>
+
+        <div class="page" id="page2">
+            <div class="decor">🌼🌼🌼</div>
+            <p>Página 2: Continue com sua mensagem, mostrando carinho, lembranças ou pensamentos especiais.</p>
+            <img src="https://via.placeholder.com/400x200" alt="Foto 2">
+            <button onclick="nextPage(3)">Próxima página →</button>
+        </div>
+
+        <div class="page" id="page3">
+            <div class="decor">💖💖💖</div>
+            <p>Página 3: Mais texto, momentos, sentimentos, qualquer coisa que você queira expressar.</p>
+            <img src="https://via.placeholder.com/400x200" alt="Foto 3">
+            <button onclick="nextPage(4)">Próxima página →</button>
+        </div>
+
+        <div class="page" id="page4">
+            <div class="decor">✨✨✨</div>
+            <p>Página 4: Quase final, prepara para a mensagem impactante final.</p>
+            <img src="https://via.placeholder.com/400x200" alt="Foto 4">
+            <button onclick="showFinal()">Finalizar</button>
+        </div>
+    </div>
+
+    <!-- Final -->
+    <div class="final">
+        <h1>💌 E lembre-se sempre...</h1>
+        <p>"O que sentimos não precisa ser dito, mas precisa ser vivido."</p>
+        <img src="https://via.placeholder.com/150" alt="Foto final">
+        <div class="author">— Henrique</div>
+    </div>
+
 </div>
 
-<audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-    const heartsContainer = document.getElementById('hearts');
-
-    function createHeart() {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.style.left = Math.random() * 100 + '%';
-        heart.style.animationDuration = (3 + Math.random() * 5) + 's';
-        heart.style.width = heart.style.height = (10 + Math.random() * 20) + 'px';
-        heartsContainer.appendChild(heart);
-
-        setTimeout(() => {
-            heart.remove();
-        }, 5000);
+    function startBook() {
+        document.querySelector('.intro').classList.remove('visible');
+        document.querySelector('.book').classList.add('visible');
     }
 
-    setInterval(createHeart, 300);
+    function nextPage(pageNumber) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+        document.getElementById('page'+pageNumber).classList.add('visible');
+    }
+
+    function showFinal() {
+        document.querySelector('.book').classList.remove('visible');
+        document.querySelector('.final').classList.add('visible');
+    }
 </script>
 
 </body>
