@@ -12,10 +12,12 @@ body {
 
 .book {
   position: relative;
-  width: 360px;   /* Largura ajustada */
-  height: 480px;  /* Altura ajustada */
+  width: 400px;   /* largura do livro */
+  height: 500px;  /* altura do livro */
   transform-style: preserve-3d;
+  perspective: 2000px;
 }
+
 
 /* Capas e páginas */
 .book .cover,
@@ -34,6 +36,14 @@ body {
   align-items: center;
   text-align: center;
 }
+
+.page.flipped,
+.cover.front.flipped {
+  transform: rotateY(-180deg) translateX(-50%);
+  left: 0;
+  box-shadow: inset -5px 0 15px rgba(0,0,0,0.2), 2px 0 10px rgba(0,0,0,0.1);
+}
+
 
 /* Capa da frente */
 .cover.front {

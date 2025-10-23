@@ -51,10 +51,26 @@ const pages = [
 let current = 0;
 const sound = document.getElementById('pageSound');
 
+// Empilha as páginas corretamente
 pages.forEach((p, i) => {
-  p.style.zIndex = pages.length - i; // empilhar
+  p.style.zIndex = pages.length - i;
+});
+
+// Função para virar página
+function nextPage(page) {
+  if(current < pages.length) {
+    page.classList.add('flipped'); // aplica a rotação e move para esquerda
+    page.style.zIndex = current;    // garante que a página virada fique atrás
+    sound.play();
+    current++;
+  }
+}
+
+// Adiciona evento de clique em todas as páginas
+pages.forEach(p => {
   p.addEventListener('click', () => nextPage(p));
 });
+
 
 function nextPage(p) {
   if(current < pages.length-1) {
