@@ -3,163 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta Inicial</title>
+<title>Carta Inicial 💌</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 
 body {
-    margin:0; padding:0;
-    font-family:'Pacifico', cursive;
-    overflow:hidden;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-    color:#fff;
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    color: #fff;
 }
 
+/* Centralização e perspectiva */
 .container {
     position: relative;
-    text-align:center;
-    z-index:2;
-    perspective:1500px;
-}
-
-/* Texto inicial */
-.intro-text {
-    position: center;
-    top:10%;
-    width: 100%;
-    text-align:center;
-    z-index:2;
+    text-align: center;
+    z-index: 2;
+    perspective: 1500px;
 }
 
 /* Envelope */
 .envelope-container {
-    width:300px; height:200px;
-    cursor:pointer;
-    margin:20px auto;
-    transform-style: preserve-3d;
-    z-index:2;
-    position:relative;
+    width: 320px;
+    height: 220px;
+    cursor: pointer;
+    margin: 20px auto;
+    position: relative;
 }
 
 .envelope {
-    width:100%; height:100%;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.3);
-    transform-origin:left;
-    transition: transform 1s ease, opacity 0.5s ease;
-    position:absolute;
-    top:0; left:0;
-}
-
-/* Folha branca */
-.sheet {
-    display:none;
-    position:fixed;
-    top:60%; left:60%;
-    width:90%; height:90%;
-    background:#fff;
-    z-index:100;
-    padding:40px;
-    box-sizing:border-box;
-    overflow-y:auto;
-    color:#333;
-    transform: translateY(100%);
-    transition: transform 0.8s ease;
+    width: 100%;
+    height: 100%;
     border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 1s ease, opacity 1s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-/* Fundo borrado atrás da folha */
-.blur-background {
-    position:fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: linear-gradient(135deg,#ff9a9e,#fad0c4);
-    filter: blur(10px) brightness(0.7);
-    z-index:1;
+/* Folha branca (carta principal) */
+.sheet {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 85%;
+    background: #fff;
+    z-index: 100;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    color: #333;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 1s ease;
+    overflow: hidden;
 }
 
-/* Botão */
+h1 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+
 button {
-    padding:10px 20px;
-    font-size:1em;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
-    background-color:#ff6b81;
-    color:#fff;
-    margin-top:15px;
-    transition:0.3s;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ff6b81;
+    color: #fff;
+    margin-top: 20px;
+    transition: 0.3s;
 }
-button:hover { background-color:#fff; color:#ff6b81; }
 
+button:hover {
+    background-color: #fff;
+    color: #ff6b81;
+}
 </style>
 </head>
 <body>
 
-<div class="container" id="mainContainer">
+<div class="container">
+    <h1>Eu quero mandar isso pra você pra entender tudo de vez 💌</h1>
+    <p>Clique no envelope para começar...</p>
 
-    <!-- Textos iniciais -->
-    <div class="intro-text" id="introText">
-        <h1>Eu quero mandar isso pra você para entender tudo de vez 💌</h1>
-        <p>Clique no envelope para abrir a carta.</p>
-    </div>
-
-    <!-- Envelope fechado e aberto -->
     <div class="envelope-container" id="envelopeContainer">
-        <img src="carta.capa.png" alt="Envelope fechado" class="envelope" id="envelopeClosed">
-        <img src="cartra.aberta.png" alt="Envelope aberto" class="envelope" id="envelopeOpen" style="display:none;">
+        <img src="carta.capa.png" alt="Envelope fechado" id="envelopeFechado" class="envelope">
+        <img src="carta.aberta.png" alt="Envelope aberto" id="envelopeAberto" class="envelope" style="opacity:0;">
     </div>
+</div>
 
-    <!-- Folha branca -->
-    <div class="sheet" id="sheet">
-        <p>Aqui você encontra meus sentimentos mais sinceros, lembranças especiais e tudo o que meu coração quer dizer.</p>
-        <p>Espero que ao ler esta carta, você sinta todo carinho que estou enviando.</p>
-        <button id="goBook">Ler a outra carta →</button>
-    </div>
-
+<!-- Carta principal -->
+<div class="sheet" id="sheet">
+    <h2>💖 Carta Principal</h2>
+    <p>
+        Às vezes as palavras falam mais quando são escritas...  
+        Essa carta é pra você entender tudo de uma vez.  
+        Quero que leia com calma, com o coração aberto.  
+    </p>
+    <p>
+        Nem sempre dá pra dizer tudo cara a cara, mas aqui cada linha  
+        vem com sinceridade e sentimento de verdade.
+    </p>
+    <p>
+        Eu só quero que você entenda o que passa dentro de mim, e  
+        o quanto tudo isso significa.
+    </p>
+    <button id="goBook">Ler a outra carta →</button>
 </div>
 
 <script>
-const envelopeClosed = document.getElementById('envelopeClosed');
-const envelopeOpen = document.getElementById('envelopeOpen');
+// Elementos
+const envelopeFechado = document.getElementById('envelopeFechado');
+const envelopeAberto = document.getElementById('envelopeAberto');
 const sheet = document.getElementById('sheet');
-const mainContainer = document.getElementById('mainContainer');
 const goBookBtn = document.getElementById('goBook');
-const introText = document.getElementById('introText');
 
-// Clique no envelope fechado → mostra envelope aberto
-envelopeClosed.addEventListener('click', ()=>{
-    envelopeClosed.style.opacity = 0;
-    setTimeout(()=>{
-        envelopeClosed.style.display = 'none';
-        envelopeOpen.style.display = 'block';
-        envelopeOpen.style.opacity = 1;
-        introText.style.display='none';
-    },500);
+// Passo 1: Envelope fechado → aberto
+envelopeFechado.addEventListener('click', () => {
+    envelopeFechado.style.opacity = '0';
+    setTimeout(() => {
+        envelopeAberto.style.opacity = '1';
+    }, 500);
 });
 
-// Clique no envelope aberto → mostra folha branca grande com fundo borrado
-envelopeOpen.addEventListener('click', ()=>{
-    // Fundo borrado atrás
-    const blur = document.createElement('div');
-    blur.classList.add('blur-background');
-    document.body.appendChild(blur);
-
-    // Mostra folha branca
-    sheet.style.display='block';
-    setTimeout(()=>{ sheet.style.transform='translateY(0)'; },50);
-
-    // Esconde envelope aberto
-    envelopeOpen.style.display='none';
+// Passo 2: Envelope aberto → carta (folha)
+envelopeAberto.addEventListener('click', () => {
+    envelopeAberto.style.opacity = '0';
+    setTimeout(() => {
+        sheet.style.display = 'block';
+        setTimeout(() => {
+            sheet.style.opacity = '1';
+            sheet.style.transform = 'scale(1)';
+        }, 50);
+    }, 500);
 });
 
-// Botão leva para o HTML do livro
-goBookBtn.addEventListener('click', ()=>{
-    window.location.href = 'carta.html'; // substitua pelo nome do segundo HTML
+// Passo 3: Botão → leva pro livro (outra carta)
+goBookBtn.addEventListener('click', () => {
+    window.location.href = 'carta-livro.html'; // segundo HTML
 });
 </script>
 
