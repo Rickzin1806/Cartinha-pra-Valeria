@@ -26,6 +26,16 @@ body {
     perspective:1500px;
 }
 
+/* Texto inicial */
+.intro-text {
+    position: absolute;
+    top:10%;
+    width: 100%;
+    text-align:center;
+    z-index:2;
+}
+
+/* Envelope */
 .envelope-container {
     width:300px; height:200px;
     cursor:pointer;
@@ -45,11 +55,12 @@ body {
     top:0; left:0;
 }
 
+/* Folha branca */
 .sheet {
     display:none;
     position:fixed;
     top:5%; left:5%;
-    width:90%; height:90%; /* folha grande */
+    width:90%; height:90%;
     background:#fff;
     z-index:100;
     padding:40px;
@@ -57,10 +68,11 @@ body {
     overflow-y:auto;
     color:#333;
     transform: translateY(100%);
-    transition: transform 1s ease;
+    transition: transform 0.8s ease;
     border-radius: 15px;
 }
 
+/* Fundo borrado atrás da folha */
 .blur-background {
     position:fixed;
     top:0; left:0;
@@ -70,6 +82,7 @@ body {
     z-index:1;
 }
 
+/* Botão */
 button {
     padding:10px 20px;
     font-size:1em;
@@ -83,13 +96,6 @@ button {
 }
 button:hover { background-color:#fff; color:#ff6b81; }
 
-.intro-text {
-    position: absolute;
-    top:10%;
-    width: 100%;
-    text-align:center;
-    z-index:2;
-}
 </style>
 </head>
 <body>
@@ -102,7 +108,7 @@ button:hover { background-color:#fff; color:#ff6b81; }
         <p>Clique no envelope para abrir a carta.</p>
     </div>
 
-    <!-- Envelope fechado -->
+    <!-- Envelope fechado e aberto -->
     <div class="envelope-container" id="envelopeContainer">
         <img src="carta.capa.png" alt="Envelope fechado" class="envelope" id="envelopeClosed">
         <img src="carta.aberta.png" alt="Envelope aberto" class="envelope" id="envelopeOpen" style="display:none;">
@@ -111,9 +117,9 @@ button:hover { background-color:#fff; color:#ff6b81; }
     <!-- Folha branca -->
     <div class="sheet" id="sheet">
         <h2>📄 Carta principal</h2>
-        <p>Aqui você coloca o texto principal da sua mensagem. Seja fofo, romântico ou pessoal.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vel velit nec nulla elementum venenatis. Quisque non lectus vel libero facilisis fermentum. Duis a sem sed neque cursus tempor.</p>
-        <p>Mais texto se quiser adicionar, lembranças ou sentimentos especiais.</p>
+        <p>Querida, quero que você entenda tudo de uma vez 💌</p>
+        <p>Aqui você encontra meus sentimentos mais sinceros, lembranças especiais e tudo o que meu coração quer dizer.</p>
+        <p>Espero que ao ler esta carta, você sinta todo carinho que estou enviando.</p>
         <button id="goBook">Ler a outra carta →</button>
     </div>
 
@@ -127,35 +133,33 @@ const mainContainer = document.getElementById('mainContainer');
 const goBookBtn = document.getElementById('goBook');
 const introText = document.getElementById('introText');
 
-// Passo 1: abrir envelope fechado → mostrar envelope aberto
+// Clique no envelope fechado → mostra envelope aberto
 envelopeClosed.addEventListener('click', ()=>{
     envelopeClosed.style.opacity = 0;
     setTimeout(()=>{
         envelopeClosed.style.display = 'none';
         envelopeOpen.style.display = 'block';
         envelopeOpen.style.opacity = 1;
-
-        // esconder textos iniciais
         introText.style.display='none';
     },500);
 });
 
-// Passo 2: clicar envelope aberto → mostrar folha branca
+// Clique no envelope aberto → mostra folha branca grande com fundo borrado
 envelopeOpen.addEventListener('click', ()=>{
-    // fundo borrado
+    // Fundo borrado atrás
     const blur = document.createElement('div');
     blur.classList.add('blur-background');
     document.body.appendChild(blur);
 
-    // mostrar folha
+    // Mostra folha branca
     sheet.style.display='block';
     setTimeout(()=>{ sheet.style.transform='translateY(0)'; },50);
 
-    // esconder envelope aberto
+    // Esconde envelope aberto
     envelopeOpen.style.display='none';
 });
 
-// Passo 3: botão leva para o segundo HTML
+// Botão leva para o HTML do livro
 goBookBtn.addEventListener('click', ()=>{
     window.location.href = 'carta-livro.html'; // substitua pelo nome do segundo HTML
 });
