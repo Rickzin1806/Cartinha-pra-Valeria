@@ -3,80 +3,57 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livro 3D Cinemático</title>
+<title>📖 Carta Livro</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="book-container" id="bookContainer">
-    <!-- Páginas do livro 3D -->
-    <div class="page" id="page1" style="z-index:4;">
+<div class="book" id="book">
+    <!-- CAPA -->
+    <div class="cover front" onclick="nextPage(0)">
+        <h1>💌 Minha Carta pra Você</h1>
+        <p>Toque para abrir</p>
+    </div>
+
+    <!-- PÁGINAS INTERNAS -->
+    <div class="page" id="page1">
         <h2>🌸 Página 1</h2>
-        <p>Mensagem inicial: seja fofo e pessoal.</p>
-        <img src="https://via.placeholder.com/300x150" alt="Foto 1">
-        <button onclick="flipPage(1)">Virar página →</button>
+        <p>Desde o momento que te conheci, algo em mim mudou. Parece que o mundo ficou mais leve, sabe?</p>
     </div>
 
-    <div class="page" id="page2" style="z-index:3;">
+    <div class="page" id="page2">
         <h2>🌼 Página 2</h2>
-        <p>Lembranças e carinho.</p>
-        <img src="https://via.placeholder.com/300x150" alt="Foto 2">
-        <button onclick="flipPage(2)">Virar página →</button>
+        <p>Os dias são melhores quando tem um pouco de você neles. Mesmo que seja só em pensamento.</p>
     </div>
 
-    <div class="page" id="page3" style="z-index:2;">
+    <div class="page" id="page3">
         <h2>💖 Página 3</h2>
-        <p>Mais sentimentos e momentos especiais.</p>
-        <img src="https://via.placeholder.com/300x150" alt="Foto 3">
-        <button onclick="flipPage(3)">Virar página →</button>
+        <p>Essa carta é só um pedacinho do que eu sinto, mas espero que toque o teu coração.</p>
     </div>
 
-    <div class="page" id="page4" style="z-index:1;">
-        <h2>✨ Página 4</h2>
-        <p>Preparando para mensagem final impactante...</p>
-        <img src="https://via.placeholder.com/300x150" alt="Foto 4">
-        <button onclick="showFinal()">Finalizar</button>
+    <!-- CONTRACAPA -->
+    <div class="cover back" id="backCover">
+        <h2>✨ Fim</h2>
+        <p>"O que é verdadeiro, o tempo não apaga."</p>
+        <p class="author">— Henrique</p>
     </div>
-</div>
-
-<div class="final" id="final">
-    <h1>💌 E lembre-se sempre...</h1>
-    <p>"O que sentimos não precisa ser dito, mas precisa ser vivido."</p>
-    <img src="https://via.placeholder.com/150" alt="Foto final">
-    <div class="author">— Henrique</div>
 </div>
 
 <audio id="pageSound">
-    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
-</audio>
-
-<audio id="bgMusic" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+    <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
 </audio>
 
 <script>
-const pages = [
-    document.getElementById('page1'),
-    document.getElementById('page2'),
-    document.getElementById('page3'),
-    document.getElementById('page4')
-];
+let currentPage = 0;
+const pages = document.querySelectorAll(".page, .cover.back");
+const sound = document.getElementById("pageSound");
 
-const pageSound = document.getElementById('pageSound');
-
-function flipPage(num) {
-    const page = pages[num-1];
-    page.style.transform = 'rotateY(-180deg)';
-    pageSound.play();
-    setTimeout(()=>{
-        page.style.display='none';
-        if(pages[num]) pages[num].style.display='flex';
-    },1000);
-}
-
-function showFinal() {
-    document.getElementById('bookContainer').style.display='none';
-    document.getElementById('final').style.display='block';
+function nextPage(num) {
+    if (num < pages.length) {
+        sound.play();
+        pages[num].classList.add("flipped");
+        currentPage++;
+    }
 }
 </script>
 
