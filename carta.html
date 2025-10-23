@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Livro Digital Realista 3D</title>
-<link rel="stylesheet" href="style.carta.css">
+<title>Livro Digital Realista</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="book">
   <!-- Capa da frente -->
-  <img src="capa.webp" class="cover front" id="coverFront">
+  <div class="cover front" id="coverFront">💌 Minha Carta</div>
 
   <!-- Páginas internas -->
   <div class="page" id="page1">
@@ -31,7 +31,7 @@
   </div>
 
   <!-- Contracapa -->
-  <img src="contracapa.jpg" class="cover back" id="coverBack">
+  <div class="cover back" id="coverBack">Fim do Livro</div>
 </div>
 
 <audio id="pageSound">
@@ -52,23 +52,17 @@ let current = 0;
 const sound = document.getElementById('pageSound');
 
 pages.forEach((p, i) => {
-  p.style.zIndex = pages.length - i;
-  p.addEventListener('click', () => nextPage());
+  p.style.zIndex = pages.length - i; // empilhar
+  p.addEventListener('click', () => nextPage(p));
 });
 
-function nextPage() {
+function nextPage(p) {
   if(current < pages.length-1) {
-    pages[current].classList.add('flipped');
+    // vira a página
+    p.style.transform = 'rotateY(-180deg) translateX(-50%)';
+    p.style.left = '0';
+    p.style.boxShadow = 'inset -5px 0 15px rgba(0,0,0,0.2), 2px 0 10px rgba(0,0,0,0.1)';
     sound.play();
-    current++;
-  } else if(current === pages.length-1) {
-    const back = pages[current];
-    back.classList.add('flipped');
-    // efeito 3D realista
-    back.style.transform = 'rotateY(-180deg) rotateZ(-2deg) translateX(-5px)';
-    back.style.boxShadow = 'inset -5px 0 20px rgba(0,0,0,0.3), 5px 0 15px rgba(0,0,0,0.2)';
-    back.style.left = '0';
-    back.style.zIndex = '1';
     current++;
   }
 }
