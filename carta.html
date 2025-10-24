@@ -51,6 +51,21 @@ const pages = [
 let current = 0;
 const sound = document.getElementById('pageSound');
 
+pages.forEach((p, i) => {
+  p.style.zIndex = pages.length - i; // empilhar visualmente no início
+  p.addEventListener('click', () => {
+    if(current < pages.length) {
+      p.classList.add('flipped');  // vira página
+      p.style.zIndex = i;          // mantém página virada à esquerda visível
+      sound.play();
+      current++;
+    }
+  });
+});
+
+let current = 0;
+const sound = document.getElementById('pageSound');
+
 // Empilha as páginas corretamente
 pages.forEach((p, i) => {
   p.style.zIndex = pages.length - i;

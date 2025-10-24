@@ -39,10 +39,11 @@ body {
 
 .page.flipped,
 .cover.front.flipped {
-  transform: rotateY(-180deg) translateX(-50%);
+  transform: rotateY(-180deg) translateX(-100%); /* move para a esquerda */
   left: 0;
-  box-shadow: inset -5px 0 15px rgba(0,0,0,0.2), 2px 0 10px rgba(0,0,0,0.1);
+  box-shadow: -5px 0 15px rgba(0,0,0,0.2);
 }
+
 
 
 /* Capa da frente */
