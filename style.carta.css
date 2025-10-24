@@ -18,7 +18,6 @@ body {
   perspective: 2000px;
 }
 
-
 /* Capas e páginas */
 .book .cover,
 .page {
@@ -37,23 +36,22 @@ body {
   text-align: center;
 }
 
+/* Página virada ou capa virada */
 .page.flipped,
 .cover.front.flipped {
-  transform: rotateY(-180deg) translateX(-100%); /* move para a esquerda */
+  transform: rotateY(-180deg) translateX(-100%);
   left: 0;
   box-shadow: -5px 0 15px rgba(0,0,0,0.2);
 }
 
-
-
 /* Capa da frente */
 .cover.front {
-  width: 300;
-  height: 200;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
   z-index: 10;
   cursor: pointer;
-  object-fit: cover; /* garante que a imagem preencha sem distorcer */
+  object-fit: cover; /* mantém proporção da imagem */
+  border-radius: 8px;
 }
 
 /* Contracapa */
@@ -66,8 +64,7 @@ body {
   object-fit: cover;
 }
 
-
-/* Página quando virada */
+/* Página interna */
 .page {
   padding: 25px;
   overflow-y: auto;
@@ -75,8 +72,15 @@ body {
 }
 
 /* Texto */
-.page h2 { color: #ff6b81; margin-bottom: 12px; font-size: 1.4em; }
-.page p { font-size: 1.05em; line-height: 1.5; }
+.page h2 {
+  color: #ff6b81;
+  margin-bottom: 12px;
+  font-size: 1.4em;
+}
+.page p {
+  font-size: 1.05em;
+  line-height: 1.5;
+}
 
 /* Responsivo */
 @media(max-width:600px){
