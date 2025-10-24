@@ -6,11 +6,13 @@
 <title>Cartinha Pra Minha Futura Esposa</title>
 <link rel="stylesheet" href="style.carta.css">
 </head>
-<body>
+<body style="margin:0; display:flex; justify-content:center; align-items:center; height:100vh; background:linear-gradient(135deg,#c8d8ff,#f7eaff); perspective:2000px; font-family:Georgia,sans-serif;">
 
-<div class="book" style="position:relative; width:400px; height:500px; perspective:2000px; margin:auto; top:50px;">
+<div class="book" style="position:relative; width:400px; height:500px; transform-style:preserve-3d;">
+  
   <!-- Capa da frente -->
-  <img src="capa.webp" class="cover front" id="coverFront" alt="Capa da frente" style="position:absolute; width:100%; height:100%; cursor:pointer; z-index:10; border-radius:8px; object-fit:cover;">
+  <img src="capa.webp" class="cover front" id="coverFront" alt="Capa da frente" 
+       style="position:absolute; width:100%; height:100%; cursor:pointer; z-index:10; border-radius:8px; object-fit:cover;">
 
   <!-- Páginas internas -->
   <div class="page" id="page1" style="position:absolute; width:100%; height:100%; background:#fffaf0; border-radius:8px; padding:25px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow-y:auto;">
@@ -31,7 +33,8 @@
   </div>
 
   <!-- Contracapa -->
-  <img src="contracapa.jpg" class="cover back" id="coverBack" alt="Contracapa" style="position:absolute; width:100%; height:100%; cursor:pointer; z-index:1; border-radius:8px; object-fit:cover;">
+  <img src="contracapa.jpg" class="cover back" id="coverBack" alt="Contracapa"
+       style="position:absolute; width:100%; height:100%; cursor:pointer; z-index:1; border-radius:8px; object-fit:cover;">
 </div>
 
 <audio id="pageSound">
@@ -51,20 +54,20 @@ const pages = [
 let current = 0;
 const sound = document.getElementById('pageSound');
 
-// Empilha as páginas no início
+// Empilha corretamente no início
 pages.forEach((p, i) => {
   p.style.zIndex = pages.length - i;
-  p.addEventListener('click', () => flipPage(p));
+  p.addEventListener('click', () => flipPage(p, i));
 });
 
-function flipPage(page) {
+function flipPage(page, i) {
   if(current < pages.length) {
+    page.style.transition = 'transform 1s ease, box-shadow 1s ease';
     page.style.transform = 'rotateY(-180deg) translateX(-100%)';
     page.style.boxShadow = '-5px 0 15px rgba(0,0,0,0.2)';
     page.style.left = '0';
-    page.style.transition = 'transform 1s ease, box-shadow 1s ease';
     sound.play();
-    page.style.zIndex = current;
+    page.style.zIndex = current; // mantém página virada à esquerda
     current++;
   }
 }
