@@ -45,23 +45,23 @@ e eu não te culpo por nada disso, fui eu quem escolheu te amar, fui eu quem esc
   </div>
 
    <div class="page" id="page4" style="position:absolute; width:100%; height:100%; background:#99dfff; border-radius:8px; padding:25px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow-y:auto;">
-    <h2>✨ Página 4</h2>
+    <h2>✨ Página 6</h2>
     <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
   </div>
 
    <div class="page" id="page4" style="position:absolute; width:100%; height:100%; background:#99dfff; border-radius:8px; padding:25px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow-y:auto;">
-    <h2>✨ Página 4</h2>
+    <h2>✨ Página 7</h2>
     <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
   </div>
 
    <div class="page" id="page4" style="position:absolute; width:100%; height:100%; background:#99dfff; border-radius:8px; padding:25px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; overflow-y:auto;">
-    <h2>✨ Página 4</h2>
+    <h2>✨ Página 8</h2>
     <p style="text-align:center; font-style:italic;">— Com carinho, Henrique 💌</p>
   </div>
 
   <!-- Contracapa -->
   <img src="contracapa.jpg" class="cover back" id="coverBack" alt="Contracapa"
-       style="position:absolute; width:100%; height:100%; cursor:pointer; z-index:1; border-radius:8px; object-fit:cover;">
+       style="position:absolute; width:100%; height:100%;
 </div>
 
 <audio id="pageSound">
@@ -75,6 +75,10 @@ const pages = [
   document.getElementById('page2'),
   document.getElementById('page3'),
   document.getElementById('page4'),
+  document.getElementById('page5'),
+  document.getElementById('page6'),
+  document.getElementById('page7'),
+  document.getElementById('page8'),
   document.getElementById('coverBack')
 ];
 
@@ -84,7 +88,7 @@ const sound = document.getElementById('pageSound');
 // Empilha corretamente no início
 pages.forEach((p, i) => {
   p.style.zIndex = pages.length - i;
-  p.addEventListener('click', () => flipPage(p, i));
+  p.addEventListener('click', () => left(p, i));
 });
 
 function flipPage(page, i) {
