@@ -1,83 +1,160 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta Para a Minha Futura esposa</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta Para a Minha Futura Esposa</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>Eu quero mandar isso pra você pra entender tudo de vez 💌</h1>
+  <div class="container">
+    <h1>Eu quero mandar isso pra entender tudo de vez
+        e decidir o que vou fazer logo 💌</h1>
     <p>Clique no envelope para começar...</p>
 
     <div class="envelope-container" id="envelopeContainer">
-        <img src="carta.capa.png" alt="Envelope fechado" id="envelopeFechado" class="envelope">
-        <img src="cartra.aberta.png" alt="Envelope aberto" id="envelopeAberto" class="envelope" style="opacity:0;">
+      <img src="carta.capa.png" alt="Envelope fechado" id="envelopeFechado" class="envelope">
+      <img src="cartra.aberta.png" alt="Envelope aberto" id="envelopeAberto" class="envelope" style="opacity:0;">
     </div>
-</div>
+  </div>
 
-<!-- Carta principal -->
-<div class="sheet" id="sheet">
-    <h2>💖 Carta Principal</h2>
-    <p>
-        Às vezes as palavras falam mais quando são escritas...  
-        Essa carta é pra você entender tudo de uma vez.  
-        Quero que leia com calma, com o coração aberto.  
-    </p>
-    <p>
-        Nem sempre dá pra dizer tudo cara a cara, mas aqui cada linha  
-        vem com sinceridade e sentimento de verdade.
-    </p>
-    <p>
-        Eu só quero que você entenda o que passa dentro de mim, e  
-        o quanto tudo isso significa.
-    </p>
-    <button id="goBook">Ler a outra carta →</button>
-</div>
+  <!-- Carta principal -->
+  <div class="sheet" id="sheet">
+    <h2>💖Ainda Te Espero, Mesmo Sem Promessa<br>Outubro 20, 2025</h2>
+    <h3>Oi;</h3>
 
-<!-- Sons -->
-<audio id="pageSound">
+    <h4>Primeiramente, obrigado por estar na minha vida!!</h4>
+    <p>
+      bom dia, boa tarde ou talvez boa noite... não sei quando você vai ler isso, mas enfim, tá aí.
+      talvez você já esteja enjoada dos meus textos enormes, mas esse é o último — ou pelo menos eu espero que seja...
+      ainda não sei por que ainda gosto de você, mas sinceramente, você pra mim é tudo que eu sempre quis em uma garota.
+    </p>
+    <p>
+      Quero que, quando você leia isso, saiba que tem alguém que pensa e ora por você todos os dias.
+      Alguém que torce por você em silêncio e quer te ver sorrir de verdade.
+    </p>
+    <p>
+      Eu sempre vou te esperar. Independente do momento e da distância, eu sempre estarei aqui pra você.
+      Eu sou o mesmo bobo apaixonado, e acho que sempre vou ser.
+    </p>
+
+    <button id="final">Próximo</button>
+  </div>
+
+  <!-- Sons -->
+  <audio id="pageSound">
     <source src="https://www.soundjay.com/button/button-4.wav" type="audio/wav">
-</audio>
-<audio id="bgMusic" autoplay loop>
+  </audio>
+  <audio id="bgMusic" autoplay loop>
     <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
-</audio>
+  </audio>
 
+  <script>
+    // Elementos
+    const envelopeFechado = document.getElementById('envelopeFechado');
+    const envelopeAberto = document.getElementById('envelopeAberto');
+    const sheet = document.getElementById('sheet');
+    const goBookBtn = document.getElementById('final');
 
-<script>
-// Elementos
-const envelopeFechado = document.getElementById('envelopeFechado');
-const envelopeAberto = document.getElementById('envelopeAberto');
-const sheet = document.getElementById('sheet');
-const goBookBtn = document.getElementById('goBook');
-
-// Passo 1: Envelope fechado → aberto
-envelopeFechado.addEventListener('click', () => {
-    envelopeFechado.style.opacity = '0';
-    setTimeout(() => {
+    // Passo 1: Envelope fechado → aberto
+    envelopeFechado.addEventListener('click', () => {
+      envelopeFechado.style.opacity = '0';
+      setTimeout(() => {
         envelopeAberto.style.opacity = '1';
-    }, 500);
-});
+      }, 500);
+    });
 
-// Passo 2: Envelope aberto → carta (folha)
-envelopeAberto.addEventListener('click', () => {
-    envelopeAberto.style.opacity = '0';
-    setTimeout(() => {
+    // Passo 2: Envelope aberto → carta (folha)
+    envelopeAberto.addEventListener('click', () => {
+      envelopeAberto.style.opacity = '0';
+      setTimeout(() => {
         sheet.style.display = 'block';
         setTimeout(() => {
-            sheet.style.opacity = '1';
-            sheet.style.transform = 'scale(1)';
+          sheet.style.opacity = '1';
+          sheet.style.transform = 'scale(1)';
         }, 50);
-    }, 500);
-});
+      }, 500);
+    });
 
-// Passo 3: Botão → leva pro livro (outra carta)
-goBookBtn.addEventListener('click', () => {
-    window.location.href = 'carta.html'; // segundo HTML
-});
-</script>
+    // ======= Sistema de trocar folhas =======
+    const cartas = [
+      `
+      <h2>💌Parte 2 — Se um dia você ler isso...</h2>
+      <p>
+      Quero que saiba que eu nunca escrevi nada com tanto sentimento quanto essas palavras.
+      Cada linha é um pedaço de mim, um reflexo do quanto eu te admiro e te quero bem.
+      Não é sobre posse, é sobre presença. Eu só quero estar com você, de qualquer forma, 
+      seja rindo, conversando ou até em silêncio.
+      </p>
+      <p>
+      Talvez o tempo mude as coisas, talvez a vida leve a gente por caminhos diferentes,
+      mas saiba que, em qualquer caminho que eu trilhar, uma parte de mim ainda vai olhar pra trás — e pensar em você.
+      </p>
+      <button id="voltar">Voltar</button>
+      <button id="proximo2">Próximo</button>
+      `,
+
+      `
+      <h2>🌙Parte 3 — Última folha</h2>
+      <p>
+      Se esse for o fim dessa carta, eu quero que ela termine com esperança.
+      Não importa o que aconteça, o amor que sinto por você me ensinou o valor da paciência, 
+      da fé e da entrega verdadeira.
+      </p>
+      <p>
+      Então, independente do destino, eu te agradeço. Por existir, por ter me mostrado o que é amar.
+      </p>
+      <button id="voltarInicio">Voltar ao início</button>
+      `
+    ];
+
+    let parteAtual = 0;
+
+    goBookBtn.addEventListener('click', () => {
+      parteAtual++;
+      trocarFolha();
+    });
+
+    function trocarFolha() {
+      if (parteAtual < cartas.length) {
+        sheet.style.opacity = '0';
+        setTimeout(() => {
+          sheet.innerHTML = cartas[parteAtual];
+          sheet.style.opacity = '1';
+          ativarBotoes();
+        }, 400);
+      } else {
+        alert('💌 Fim da carta.');
+      }
+    }
+
+    function ativarBotoes() {
+      const voltar = document.getElementById('voltar');
+      const proximo2 = document.getElementById('proximo2');
+      const voltarInicio = document.getElementById('voltarInicio');
+
+      if (voltar) {
+        voltar.addEventListener('click', () => {
+          parteAtual = 0;
+          location.reload();
+        });
+      }
+
+      if (proximo2) {
+        proximo2.addEventListener('click', () => {
+          parteAtual++;
+          trocarFolha();
+        });
+      }
+
+      if (voltarInicio) {
+        voltarInicio.addEventListener('click', () => {
+          location.reload();
+        });
+      }
+    }
+  </script>
 
 </body>
 </html>
