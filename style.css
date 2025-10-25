@@ -6,11 +6,10 @@ body {
   padding: 0;
 }
 
-  body.carta-aberta {
+body.carta-aberta {
   background-color: rgba(0, 0, 0, 0.3);
   transition: background-color 0.5s ease;
 }
-
 
 .container {
   margin-top: 50px;
@@ -21,28 +20,23 @@ body {
   cursor: pointer;
   transition: opacity 0.5s ease;
 }
+
 .sheet {
   display: none;
   opacity: 0;
   transform: scale(0.95);
   width: 80%; /* ocupa 80% da largura da tela */
   max-width: 800px; /* limite máximo */
+  margin: 40px auto; /* centraliza horizontalmente, mas deixa rolagem normal */
   height: auto;
-  max-height: 80vh; /* limita altura a 80% da tela */
-  overflow-y: auto; /* rolagem se o texto for muito longo */
-  
-  /* Centralização perfeita */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.95);
+  max-height: none; /* deixa altura crescer normalmente */
+  overflow: visible; /* sem rolagem interna */
   
   background: #fffaf0;
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   text-align: left;
-  z-index: 10;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
