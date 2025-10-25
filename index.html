@@ -77,8 +77,7 @@ Parece exagero, mas é o que eu sinto e desejo.
   const envelopeFechado = document.getElementById('envelopeFechado');
   const envelopeAberto = document.getElementById('envelopeAberto');
   const sheet = document.getElementById('sheet');
-  const pag2 = document.getElementById('pag2');
-  const pag3 = document.getElementById('pag3');
+  const goBookBtn = document.getElementById('pag2'); // botão da primeira página
 
   // Abrir envelope
   envelopeFechado.addEventListener('click', () => {
@@ -98,7 +97,6 @@ Parece exagero, mas é o que eu sinto e desejo.
       }, 50);
     }, 500);
   });
-
 
     // ======= Sistema de trocar folhas =======
     const cartas = [
@@ -138,11 +136,11 @@ Parece exagero, mas é o que eu sinto e desejo.
   `
 ];
 
-  let parteAtual = 0;
+    let parteAtual = 0;
 
+  // Botão da primeira página
   goBookBtn.addEventListener('click', () => {
-    parteAtual++;
-    trocarFolha();
+    trocarFolha(); // vai para a primeira carta do array
   });
 
   function trocarFolha() {
