@@ -19,21 +19,17 @@ body.carta-aberta {
   width: 200px;
   cursor: pointer;
   transition: opacity 0.5s ease;
+  max-width: 90%; /* responsivo para celular */
 }
 
 .sheet {
   display: none;
   opacity: 0;
-  transform: scale(0.95);
-  width: 80%; /* ocupa 80% da largura da tela */
-  max-width: 800px; /* limite máximo */
-  margin: 40px auto; /* centraliza horizontalmente, mas deixa rolagem normal */
-  height: auto;
-  max-height: none; /* deixa altura crescer normalmente */
-  overflow: visible; /* sem rolagem interna */
-  
+  width: 90%; /* responsivo: ocupa quase toda a tela no celular */
+  max-width: 800px; /* limite máximo em desktop */
+  margin: 40px auto; /* centraliza horizontalmente */
   background: #fffaf0;
-  padding: 40px;
+  padding: 30px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.25);
   text-align: left;
@@ -54,4 +50,21 @@ button {
 
 button:hover {
   background-color: #f16c8a;
+}
+
+/* Responsividade para celular */
+@media screen and (max-width: 480px) {
+  .sheet {
+    width: 95%;
+    padding: 20px;
+  }
+
+  .envelope-container img {
+    width: 150px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
 }
