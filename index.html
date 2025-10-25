@@ -65,72 +65,72 @@ Parece exagero, mas é o que eu sinto e desejo.
     <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
   </audio>
 
-  <script>
-    // Elementos
-    const envelopeFechado = document.getElementById('envelopeFechado');
-    const envelopeAberto = document.getElementById('envelopeAberto');
-    const sheet = document.getElementById('sheet');
-    const goBookBtn = document.getElementById('final');
+ <script>
+  // Elementos
+  const envelopeFechado = document.getElementById('envelopeFechado');
+  const envelopeAberto = document.getElementById('envelopeAberto');
+  const sheet = document.getElementById('sheet');
+  const goBookBtn = document.getElementById('final');
 
-    // Passo 1: Envelope fechado → aberto
-    envelopeFechado.addEventListener('click', () => {
-      envelopeFechado.style.opacity = '0';
-      setTimeout(() => {
-        envelopeAberto.style.opacity = '1';
-      }, 500);
-    });
+  // Abrir envelope
+  envelopeFechado.addEventListener('click', () => {
+    envelopeFechado.style.opacity = '0';
+    setTimeout(() => {
+      envelopeAberto.style.opacity = '1';
+    }, 500);
+  });
 
-    // Passo 2: Envelope aberto → carta (folha)
-    envelopeAberto.addEventListener('click', () => {
-      envelopeAberto.style.opacity = '0';
+  envelopeAberto.addEventListener('click', () => {
+    envelopeAberto.style.opacity = '0';
+    setTimeout(() => {
+      sheet.style.display = 'block';
       setTimeout(() => {
-        sheet.style.display = 'block';
-        setTimeout(() => {
-          sheet.style.opacity = '1';
-          sheet.style.transform = 'scale(1)';
-        }, 50);
-      }, 500);
-    });
+        sheet.style.opacity = '1';
+        sheet.style.transform = 'scale(1)';
+      }, 50);
+    }, 500);
+  });
+
 
     // ======= Sistema de trocar folhas =======
     const cartas = [
-      
-    <div id="pag2" style="display:none;">
-      <h2>💌Parte 2 — Leia com Carinho</h2>
-      <p>
+  `
+  <div id="pag2">
+    <h2>💌 Parte 2 — Leia com Carinho</h2>
+    <p>
       Quero que saiba que eu nunca escrevi nada com tanto sentimento quanto essas palavras.
       Cada linha é um pedaço de mim, um reflexo do quanto eu te admiro e te quero bem.
       Não é sobre posse, é sobre presença. Eu só quero estar com você, de qualquer forma, 
       seja rindo, conversando ou até em silêncio.
-      </p>
-      <p>
+    </p>
+    <p>
       Talvez o tempo mude as coisas, talvez a vida leve a gente por caminhos diferentes,
-      mas saiba que, em qualquer caminho que eu trilhar, uma parte de mim ainda vai olhar pra trás — e pensar em você.
-      </p>
-      <p> Se esse for o fim dessa carta, eu quero que ela termine com esperança.
+      mas saiba que, em qualquer caminho que eu trilhar, uma parte de mim ainda vai olhar pra trás e pensar em você.
+    </p>
+    <p>
+      Se esse for o fim dessa carta, eu quero que ela termine com esperança.
       Não importa o que aconteça, o amor que sinto por você me ensinou o valor da paciência, 
       da fé e da entrega verdadeira.
-      </p>
-      <button id="voltar">Voltar</button>
-      <button id="pag3">Próximo</button>
-      `,
+    </p>
+    <button id="voltar">Voltar</button>
+    <button id="proximo2">Próximo</button>
+  </div>
+  `
+  `
+  <div id="pag3">
+    <h2>🌙 Parte 3 — Última folha</h2>
+    <p>
+      ah… e eu menti quando disse que precisava de um mês pra parar de gostar de você.
+      pra isso, eu precisaria nascer de novo.
+      sem minhas memórias, e sem meus sentimentos.
+    </p>
+    <h5>Te amo demais. ❤️♾️🤍</h5>
+    <button id="voltarInicio">Voltar ao início</button>
+  </div>
+  `
+];
 
-      <div id="pag3" style="display:none;">
-      <h2>🌙Parte 3 — Última folha</h2>
-      <p>
-     ah… e eu menti quando disse que precisava de um mês pra parar de gostar de você.
-pra isso, eu precisaria nascer de novo.
-sem minhas memórias, sem meus sentimentos.
-
-      </p>
-      <h5>
-      Te amo demais. ❤️♾️🤍
-      </h5>
-      <button id="voltarInicio">Voltar ao início</button>
-      `
-    ];
-
-   let parteAtual = 0;
+  let parteAtual = 0;
 
   goBookBtn.addEventListener('click', () => {
     parteAtual++;
